@@ -4,14 +4,15 @@ import "./style/index.css";
 import App from "./App";
 import React from "react";
 import ReactDOM from "react-dom";
-import { ApolloClient } from "apollo-client";
-import { createHttpLink } from "apollo-link-http";
-import { InMemoryCache } from "apollo-cache-inmemory";
-import { ApolloProvider } from "react-apollo";
-import gql from "graphql-tag";
-
+import {
+  ApolloClient,
+  InMemoryCache,
+  ApolloProvider,
+  useQuery,
+  gql,
+} from "@apollo/client";
 const client = new ApolloClient({
-  link: createHttpLink({ uri: "https://api.github.com/graphql" }),
+  uri: "https://48p1r2roz4.sse.codesandbox.io",
   cache: new InMemoryCache(),
 });
 
