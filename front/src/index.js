@@ -1,24 +1,46 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
+import { createRoot } from "react-dom/client";
 import "./style/index.css";
 import App from "./App";
-import React from "react";
-import ReactDOM from "react-dom";
 import {
   ApolloClient,
   InMemoryCache,
   ApolloProvider,
+  HttpLink,
   useQuery,
   gql,
+  from,
 } from "@apollo/client";
+
 const client = new ApolloClient({
-  uri: "https://48p1r2roz4.sse.codesandbox.io",
   cache: new InMemoryCache(),
+  uri: "http://localhost:8000/graphql",
 });
 
-ReactDOM.render(
-  <ApolloProvider client={client}>
-    <App />
-  </ApolloProvider>,
-  document.getElementById("root")
+const EXCHANGE_RATES = gql`
+  query getSport {
+    id
+    sport
+    slot
+    maxCurrent
+    current
+    users
+  }
+`;
+client
+  .query({
+    query: EXCHANGE_RATES,
+  })
+  .then((response) => console.log(response.data))
+  .catch((err) => console.error(err));
+
+const root = createRoot(document.getElementById("root"));
+
+root.render(
+  <React.StrictMode>
+    <ApolloProvider client={client}>
+      <App />
+    </ApolloProvider>
+  </React.StrictMode>
 );
