@@ -1,0 +1,14 @@
+img#image {
+  height: 160px;
+  width: 160px;
+  padding: 0px 95px 30px 95px;
+  background-color: #7caade;
+}
+
+input {
+  margin: 0px 50px;
+}
+
+#button {
+  margin: 0px 33px 20px 33px;
+}

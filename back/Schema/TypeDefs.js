@@ -24,7 +24,7 @@ const typeDefs = gql`
       maxCurrent: Int
       current: Int
       users: [String]
-    ): sports
+    ): [sports]
     reserver(
       id: Int
       sport: String
@@ -32,7 +32,7 @@ const typeDefs = gql`
       maxCurrent: Int
       current: Int
       users: [String]
-    ): sports
+    ): [sports]
   }
 `;
 

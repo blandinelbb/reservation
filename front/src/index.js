@@ -1,39 +1,31 @@
 import React from "react";
-import ReactDOM from "react-dom/client";
-import { createRoot } from "react-dom/client";
 import "./style/index.css";
+import { createRoot } from "react-dom/client";
 import App from "./App";
 import {
+  ApolloProvider,
+  gql,
   ApolloClient,
   InMemoryCache,
-  ApolloProvider,
-  HttpLink,
-  useQuery,
-  gql,
-  from,
 } from "@apollo/client";
 
-const client = new ApolloClient({
-  cache: new InMemoryCache(),
-  uri: "http://localhost:8000/graphql",
-});
-
 const EXCHANGE_RATES = gql`
-  query getSport {
-    id
-    sport
-    slot
-    maxCurrent
-    current
-    users
+  query getSport($id: Int!) {
+    getSport(id: id) {
+      id
+      sport
+      slot
+      maxCurrent
+      current
+      users
+    }
   }
 `;
-client
-  .query({
-    query: EXCHANGE_RATES,
-  })
-  .then((response) => console.log(response.data))
-  .catch((err) => console.error(err));
+
+const client = new ApolloClient({
+  uri: "https://48p1r2roz4.sse.codesandbox.io",
+  cache: new InMemoryCache(),
+});
 
 const root = createRoot(document.getElementById("root"));
 

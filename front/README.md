@@ -68,3 +68,11 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+### Source
+
+https://fr.dreamstime.com/joueur-tennis-heureux-dr%C3%B4le-se-tenant-court-illustration-conception-personnage-dessin-anim%C3%A9-image113429591
+https://www.istockphoto.com/fr/photos/dessin-judo
+https://www.shutterstock.com/fr/search/fitness+body+combat
+https://fr.dreamstime.com/illustration/zumba.html
+http://www.bugei.fr/club-boxe-francaise/

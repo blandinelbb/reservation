@@ -7,20 +7,19 @@ const resolvers = {
     },
   },
   Mutation: {
-    annuler(userId) {
-      sports.current--;
-      sports.forEach((e) => {
-        for (let i = 0; i < e.users.length; i++)
-          if (e.users[i] === userId) e.users.slice(i, i);
-      });
-      return sports;
+    annuler(sport) {
+      sport.current--;
+      for (let i = 0; i < sport.users.length; i++)
+        if (sport.users[i] === "b558ff34-b933-465b-a2a2-575eda3cf868")
+          sport.users.slice(i, i);
+      return sport;
     },
-    reserver(userId) {
-      if (sports.users.length < sports.users.maxCurrent) {
-        sports.currenet++;
-        sports.users.push(userId);
+    reserver(sport) {
+      if (sport.users.length < sport.users.maxCurrent) {
+        sport.current++;
+        sport.users.push("b558ff34-b933-465b-a2a2-575eda3cf868");
       }
-      return sports;
+      return sport;
     },
   },
 };
