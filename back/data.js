@@ -24,7 +24,7 @@ const data = [
     id: 2,
     sport: "Body combat",
     slot: ["14:00", "16:00"],
-    max: 5,
+    maxCurrent: 5,
     current: 3,
     users: [
       "5b28e72f-2146-407f-9ee7-c5bf694445f5",

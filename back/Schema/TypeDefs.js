@@ -17,22 +17,8 @@ const typeDefs = gql`
   }
 
   type Mutation {
-    annuler(
-      id: Int
-      sport: String
-      slot: [String]
-      maxCurrent: Int
-      current: Int
-      users: [String]
-    ): [sports]
-    reserver(
-      id: Int
-      sport: String
-      slot: [String]
-      maxCurrent: Int
-      current: Int
-      users: [String]
-    ): [sports]
+    annuler: [sports]
+    reserver: [sports]
   }
 `;
 
