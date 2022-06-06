@@ -1,0 +1,21 @@
+ul {
+  position: relative;
+  width: 1200px;
+  text-align: center;
+  margin: 25px 70px;
+  padding: 10px 5px 10px 5px;
+  list-style-type: none;
+  display: inline-block;
+}
+li {
+  font-size: 20px;
+  display: inline;
+  margin: 30px;
+  padding: 10px;
+}
+#link {
+  text-decoration: none;
+  color: rgb(254, 254, 254);
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-weight: bold;
+}

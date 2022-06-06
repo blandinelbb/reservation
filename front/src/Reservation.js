@@ -1,9 +1,8 @@
 import "./style/reservation.css";
 import { useEffect, useState } from "react";
+import { useCookies } from "react-cookie";
 import { gql, useQuery, ApolloClient, InMemoryCache } from "@apollo/client";
 import { Box, Button } from "@mui/material";
-import { assertValidExecutionArguments } from "graphql/execution/execute";
-import axios from "axios";
 
 const EXCHANGE_RATES = gql`
   query {
@@ -29,15 +28,18 @@ function Reservation() {
   const [bodyCombat, setBodyCombat] = useState();
   const [zumba, setZumba] = useState();
   const [boxe, setBoxe] = useState();
-  const [mesReservations, setMesReservation] = useState();
-  const [typeSport, setTypeSport] = useState();
+  const [mesReservations, setMesReservation] = useState([]);
   const [heure, setHeure] = useState();
+  const [estSelectionner, setEstSelectionner] = useState(false);
+  const [cookies, setCookie] = useCookies(["sport"]);
 
   const tab = [0];
-  const tab1 = [0];
 
+  function refreshPage() {
+    window.location.reload(false);
+  }
   useEffect(() => {
-    const getReservaton = async (e) => {
+    const getReservation = async (e) => {
       try {
         const res = await client
           .query({
@@ -60,22 +62,58 @@ function Reservation() {
             setBodyCombat(result.data.getSport[2]);
             setZumba(result.data.getSport[3]);
             setBoxe(result.data.getSport[4]);
-            console.log(result.data.getSport[1].current);
           });
       } catch (e) {
         console.log(e);
       }
     };
-    getReservaton();
+    getReservation();
   }, []);
 
   const reserver = async (e) => {
     try {
+      var type;
+      if (e == 0) type = `reserverTennis`;
+      else if (e == 1) type = `reserverJudo`;
+      else if (e == 2) type = `reserverCombat`;
+      else if (e == 3) type = `reserverZumba`;
+      else if (e == 4) type = `reserverBoxe`;
+
       const res = await client
         .mutate({
           mutation: gql`
             mutation Mutation {
-              reserver {
+              ${type} {
+                id
+                sport
+                slot
+                maxCurrent
+                current
+                users
+              }
+            }
+          `,
+        })
+        .then((result) => {
+          console.log(result);
+        });
+    } catch (e) {
+      console.log(e);
+    }
+  };
+  const annuler = async (e) => {
+    try {
+      var type;
+      if (e == 0) type = `annulerTennis`;
+      else if (e == 1) type = `annulerJudo`;
+      else if (e == 2) type = `annulerCombat`;
+      else if (e == 3) type = `annulererZumba`;
+      else if (e == 4) type = `annulerBoxe`;
+      const res = await client
+        .mutate({
+          mutation: gql`
+            mutation Mutation {
+              ${type} {
                 id
                 sport
                 slot
@@ -94,60 +132,20 @@ function Reservation() {
     }
   };
 
-  const envoieData = async (e) => {
-    try {
-      const res1 = await axios
-        .post("http://localhost:3000/reservation", { heure, typeSport })
-        .then((response) => {
-          console.log("ojjS");
-          if (typeSport === 0) {
-            setTennis(response);
-          } else if (typeSport === 1) {
-            setJudo(response);
-          } else if (typeSport === 2) {
-            setBodyCombat(response);
-          } else if (typeSport === 3) {
-            setZumba(response);
-          } else if (typeSport === 4) {
-            setBoxe(response);
-          }
-        });
-    } catch (e) {
-      console.log(e);
-    }
-  };
   const { loading, error, data } = useQuery(EXCHANGE_RATES);
 
   if (loading) return <p>Loading...</p>;
-  //if (error) return <p>Error : {error.message}</p>;
-  /*  {data.rates.map(({ currency, rate }) => (
-        <div key={currency}>
-          <p>
-            {currency}: {rate}
-          </p>
-        </div>
-      ))}
-      {data.setSport.map(({ id, sport }) => (
-        <div key={id}>
-          <p>
-            {id}: {sport}
-          </p>
-        </div>
-      ))}
-      {exchange.map((res, index) => {
-        return <p key={index}>{res}</p>;
-      })}*/
-
-  return (
+  return !loading ? (
     <div>
       <hr></hr>
       <h3>Mes réservations</h3>
+      <h4>{heure}</h4>
       <hr></hr>
       <Box
         sx={{
           width: 350,
           height: 350,
-          backgroundColor: "#7caade",
+          backgroundColor: "#fcfbfa",
           display: "inline-block",
           margin: "35px",
           borderRadius: "7px",
@@ -165,6 +163,7 @@ function Reservation() {
                 value={horaire}
                 onClick={(e) => {
                   setHeure(e.target.value);
+                  setEstSelectionner(true);
                 }}
               />
               {horaire}
@@ -187,9 +186,10 @@ function Reservation() {
                 variant="contained"
                 id="button"
                 onClick={(e) => {
-                  reserver();
-                  envoieData();
-                  setTypeSport(0);
+                  if (estSelectionner) {
+                    reserver(0);
+                    refreshPage();
+                  } else alert("Sélectionné un horaire");
                 }}
               >
                 Réserver
@@ -210,7 +210,15 @@ function Reservation() {
             );
           } else {
             return (
-              <Button key={index} variant="contained" id="button">
+              <Button
+                key={index}
+                variant="contained"
+                id="button"
+                onClick={(e) => {
+                  annuler(0);
+                  refreshPage();
+                }}
+              >
                 Annuler
               </Button>
             );
@@ -221,7 +229,7 @@ function Reservation() {
         sx={{
           width: 350,
           height: 350,
-          backgroundColor: "#7caade",
+          backgroundColor: "#fcfbfa",
           display: "inline-block",
           margin: "35px",
           borderRadius: "7px",
@@ -238,7 +246,8 @@ function Reservation() {
                 name="dispo"
                 value={horaire}
                 onClick={(e) => {
-                  setHeure(e.target.value);
+                  setHeure([e.target.value]);
+                  setEstSelectionner(true);
                 }}
               />
               {horaire}
@@ -261,9 +270,10 @@ function Reservation() {
                 variant="contained"
                 id="button"
                 onClick={(e) => {
-                  reserver();
-                  envoieData();
-                  setTypeSport(1);
+                  if (estSelectionner) {
+                    reserver(1);
+                    refreshPage();
+                  } else alert("Sélectionné un horaire");
                 }}
               >
                 Réserver
@@ -284,7 +294,15 @@ function Reservation() {
             );
           } else {
             return (
-              <Button key={index} variant="contained" id="button">
+              <Button
+                key={index}
+                variant="contained"
+                id="button"
+                onClick={(e) => {
+                  annuler(1);
+                  refreshPage();
+                }}
+              >
                 Annuler
               </Button>
             );
@@ -295,7 +313,7 @@ function Reservation() {
         sx={{
           width: 350,
           height: 350,
-          backgroundColor: "#7caade",
+          backgroundColor: "#fcfbfa",
           display: "inline-block",
           margin: "35px",
           borderRadius: "7px",
@@ -313,6 +331,7 @@ function Reservation() {
                 value={horaire}
                 onClick={(e) => {
                   setHeure(e.target.value);
+                  setEstSelectionner(true);
                 }}
               />
               {horaire}
@@ -335,9 +354,10 @@ function Reservation() {
                 variant="contained"
                 id="button"
                 onClick={(e) => {
-                  reserver();
-                  envoieData();
-                  setTypeSport(2);
+                  if (estSelectionner) {
+                    reserver(2);
+                    refreshPage();
+                  } else alert("Sélectionné un horaire");
                 }}
               >
                 Réserver
@@ -358,7 +378,15 @@ function Reservation() {
             );
           } else {
             return (
-              <Button key={index} variant="contained" id="button">
+              <Button
+                key={index}
+                variant="contained"
+                id="button"
+                onClick={(e) => {
+                  annuler(2);
+                  refreshPage();
+                }}
+              >
                 Annuler
               </Button>
             );
@@ -369,7 +397,7 @@ function Reservation() {
         sx={{
           width: 350,
           height: 350,
-          backgroundColor: "#7caade",
+          backgroundColor: "#fcfbfa",
           display: "inline-block",
           margin: "35px",
           borderRadius: "7px",
@@ -387,6 +415,7 @@ function Reservation() {
                 value={horaire}
                 onClick={(e) => {
                   setHeure(e.target.value);
+                  setEstSelectionner(true);
                 }}
               />
               {horaire}
@@ -409,9 +438,10 @@ function Reservation() {
                 variant="contained"
                 id="button"
                 onClick={(e) => {
-                  reserver();
-                  envoieData();
-                  setTypeSport(3);
+                  if (estSelectionner) {
+                    reserver(3);
+                    refreshPage();
+                  } else alert("Sélectionné un horaire");
                 }}
               >
                 Réserver
@@ -432,7 +462,15 @@ function Reservation() {
             );
           } else {
             return (
-              <Button key={index} variant="contained" id="button">
+              <Button
+                key={index}
+                variant="contained"
+                id="button"
+                onClick={(e) => {
+                  annuler(3);
+                  refreshPage();
+                }}
+              >
                 Annuler
               </Button>
             );
@@ -443,7 +481,7 @@ function Reservation() {
         sx={{
           width: 350,
           height: 350,
-          backgroundColor: "#7caade",
+          backgroundColor: "#fcfbfa",
           display: "inline-block",
           margin: "35px",
           borderRadius: "7px",
@@ -461,6 +499,7 @@ function Reservation() {
                 value={horaire}
                 onClick={(e) => {
                   setHeure(e.target.value);
+                  setEstSelectionner(true);
                 }}
               />
               {horaire}
@@ -483,9 +522,10 @@ function Reservation() {
                 variant="contained"
                 id="button"
                 onClick={(e) => {
-                  reserver();
-                  envoieData();
-                  setTypeSport(4);
+                  if (estSelectionner) {
+                    reserver(4);
+                    refreshPage();
+                  } else alert("Sélectionné un horaire");
                 }}
               >
                 Réserver
@@ -506,7 +546,15 @@ function Reservation() {
             );
           } else {
             return (
-              <Button key={index} variant="contained" id="button">
+              <Button
+                key={index}
+                variant="contained"
+                id="button"
+                onClick={(e) => {
+                  annuler(4);
+                  refreshPage();
+                }}
+              >
                 Annuler
               </Button>
             );
@@ -514,6 +562,8 @@ function Reservation() {
         })}
       </Box>
     </div>
+  ) : (
+    refreshPage()(<></>)
   );
 }
 

@@ -17,8 +17,16 @@ const typeDefs = gql`
   }
 
   type Mutation {
-    annuler: [sports]
-    reserver: [sports]
+    annulerTennis: [sports]
+    reserverTennis: [sports]
+    annulerJudo: [sports]
+    reserverJudo: [sports]
+    annulerCombat: [sports]
+    reserverCombat: [sports]
+    annulerZumba: [sports]
+    reserverZumba: [sports]
+    annulerBoxe: [sports]
+    reserverBoxe: [sports]
   }
 `;
 

@@ -71,8 +71,8 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
 
 ### Source
 
-https://fr.dreamstime.com/joueur-tennis-heureux-dr%C3%B4le-se-tenant-court-illustration-conception-personnage-dessin-anim%C3%A9-image113429591
-https://www.istockphoto.com/fr/photos/dessin-judo
-https://www.shutterstock.com/fr/search/fitness+body+combat
-https://fr.dreamstime.com/illustration/zumba.html
-http://www.bugei.fr/club-boxe-francaise/
+https://www.bnpparibas.ca/fr/bnp-paribas-et-le-tennis/
+https://www.us-fontenay.com/activite/judo/
+https://www.youtube.com/watch?v=Pal-AmHRzjw
+https://www.salsadanse.com/latin-training-zumba/
+https://www.ffsavate.com/viesportive/competitions/archives-competitions/2019-2020.html

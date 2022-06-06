@@ -1,16 +1,16 @@
 import "./style/index.css";
 import Header from "./Header";
-import Acceuil from "./Acceuil";
+import Presentation from "./Presentation";
 import Reservation from "./Reservation";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 function App() {
   return (
     <div className="App">
-      <Header />
       <BrowserRouter>
+        <Header />
         <Routes>
-          <Route exact path="/" element={<Acceuil />} />
+          <Route exact path="/" element={<Presentation />} />
           <Route path="/reservation" element={<Reservation />} />
         </Routes>
       </BrowserRouter>

@@ -1,7 +1,5 @@
 import "./style/header.css";
-import Acceuil from "./Acceuil";
-import Reservation from "./Reservation";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Navigation from "./Navigation";
 import { BottomNavigation } from "@mui/material";
 
 function Header() {
@@ -13,6 +11,7 @@ function Header() {
           label="nav_bar"
         >
           <h1 id="titre">Sport</h1>
+          <Navigation />
         </BottomNavigation>
       </header>
     </div>
