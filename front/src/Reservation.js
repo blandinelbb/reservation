@@ -135,7 +135,7 @@ function Reservation() {
   const { loading, error, data } = useQuery(EXCHANGE_RATES);
 
   if (loading) return <p>Loading...</p>;
-  return !loading ? (
+  return (
     <div>
       <hr></hr>
       <h3>Mes réservations</h3>
@@ -189,7 +189,7 @@ function Reservation() {
                   if (estSelectionner) {
                     reserver(0);
                     refreshPage();
-                  } else alert("Sélectionné un horaire");
+                  } else alert("Sélectionner une horaire");
                 }}
               >
                 Réserver
@@ -273,7 +273,7 @@ function Reservation() {
                   if (estSelectionner) {
                     reserver(1);
                     refreshPage();
-                  } else alert("Sélectionné un horaire");
+                  } else alert("Sélectionner une horaire");
                 }}
               >
                 Réserver
@@ -357,7 +357,7 @@ function Reservation() {
                   if (estSelectionner) {
                     reserver(2);
                     refreshPage();
-                  } else alert("Sélectionné un horaire");
+                  } else alert("Sélectionner une horaire");
                 }}
               >
                 Réserver
@@ -441,7 +441,7 @@ function Reservation() {
                   if (estSelectionner) {
                     reserver(3);
                     refreshPage();
-                  } else alert("Sélectionné un horaire");
+                  } else alert("Sélectionner une horaire");
                 }}
               >
                 Réserver
@@ -525,7 +525,7 @@ function Reservation() {
                   if (estSelectionner) {
                     reserver(4);
                     refreshPage();
-                  } else alert("Sélectionné un horaire");
+                  } else alert("Sélectionner une horaire");
                 }}
               >
                 Réserver
@@ -562,8 +562,6 @@ function Reservation() {
         })}
       </Box>
     </div>
-  ) : (
-    refreshPage()(<></>)
   );
 }
 

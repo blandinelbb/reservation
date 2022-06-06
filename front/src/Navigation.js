@@ -11,7 +11,14 @@ function Navigation() {
           </Link>
         </li>
         <li>
-          <Link to="/reservation" activeclassname="nav_active" id="link">
+          <Link
+            to="/reservation"
+            activeclassname="nav_active"
+            id="link"
+            onClick={() => {
+              window.location.href = "/reservation";
+            }}
+          >
             Réservation
           </Link>
         </li>
