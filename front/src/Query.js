@@ -1,6 +1,6 @@
 import { gql } from "@apollo/client";
 
-const EXCHANGE_RATES = gql`
+const Query = gql`
   query {
     getSport {
       id
@@ -13,4 +13,4 @@ const EXCHANGE_RATES = gql`
   }
 `;
 
-export default EXCHANGE_RATES;
+export default Query;

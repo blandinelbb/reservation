@@ -1,5 +1,5 @@
-import { Link } from "react-router-dom";
 import "./style/navigation.css";
+import { Link } from "react-router-dom";
 
 function Navigation() {
   return (
@@ -19,7 +19,12 @@ function Navigation() {
               window.location.href = "/reservation";
             }}
           >
-            Réservation
+            Réserver
+          </Link>
+        </li>
+        <li>
+          <Link to="/contact" activeclassname="nav_active" id="link">
+            Contact & FAQ
           </Link>
         </li>
       </ul>

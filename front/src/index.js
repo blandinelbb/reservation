@@ -1,26 +1,8 @@
-import React from "react";
 import "./style/index.css";
-import { createRoot } from "react-dom/client";
+import React from "react";
 import App from "./App";
-import {
-  ApolloProvider,
-  gql,
-  ApolloClient,
-  InMemoryCache,
-} from "@apollo/client";
-
-const EXCHANGE_RATES = gql`
-  query getSport($id: Int!) {
-    getSport(id: id) {
-      id
-      sport
-      slot
-      maxCurrent
-      current
-      users
-    }
-  }
-`;
+import { createRoot } from "react-dom/client";
+import { ApolloProvider, ApolloClient, InMemoryCache } from "@apollo/client";
 
 const client = new ApolloClient({
   uri: "http://localhost:8000/graphql",

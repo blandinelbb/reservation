@@ -1,4 +1,3 @@
-import "./style/header.css";
 import Navigation from "./Navigation";
 import { BottomNavigation } from "@mui/material";
 
@@ -7,10 +6,15 @@ function Header() {
     <div>
       <header>
         <BottomNavigation
-          sx={{ height: 100, backgroundColor: "#121212" }}
+          sx={{
+            height: 100,
+            backgroundColor: "#121212",
+            top: "-1px",
+            width: "1599px",
+          }}
           label="nav_bar"
         >
-          <h1 id="titre">Sport</h1>
+          <img src={"logo.png"} alt="logo" className="logo" />
           <Navigation />
         </BottomNavigation>
       </header>

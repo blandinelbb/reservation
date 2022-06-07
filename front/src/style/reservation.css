@@ -14,3 +14,16 @@ input {
 #typeSport {
   text-align: center;
 }
+
+.mes_reservations {
+  width: 1600px;
+}
+
+.titre_resa {
+  margin-left: 120px;
+}
+
+.items {
+  width: 1300px;
+  margin-left: 170px;
+}
