@@ -6,9 +6,9 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 In the project directory, you can run:
 
-### To install all packages run : `cd front | npm i`
+### To install all frontend packages run : `cd front | npm i`
 
-### To install all packages run : `cd back | npm i`
+### To install all backend packages run : `cd back | npm i`
 
 ### Frontend : `cd front | npm start`
 
