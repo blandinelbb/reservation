@@ -32,7 +32,7 @@ You can learn more in the [Create React App documentation](https://facebook.gith
 
 To learn React, check out the [React documentation](https://reactjs.org/).
 
-### Image Source
+### Images Source
 
 Tennis : https://www.bnpparibas.ca/fr/bnp-paribas-et-le-tennis/
 
